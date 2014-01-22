@@ -2,7 +2,7 @@
 
 %Résout l'équation différentielle
 options = odeset('RelTol',1e-10,'AbsTol',[1e-10 1e-10]);
-[T,Y] = ode45('system',[0.001 15],[1 -1],options);
+[T,Y] = ode45('system',[0.001 9],[1 -1],options);
 
 %Calcule la courbe donnant la position moyenne des électrons
 min=minimum(T,Y)
@@ -19,7 +19,7 @@ end
 
 %Calcule la dérivée de la courbe moyenne pour estimer le coefficient
 %directeur
-dt=floor(size(T,1)/50);
+dt=floor(size(T,1)/10);
 derivee=zeros(size(T)-min-dt,2);
 for i=1 : size(derivee,1)
     derivee(i,1)=courbeMoyenne(i,1);
@@ -30,5 +30,5 @@ end
 subplot(1,2,1);
 plot(T,Y(:,1),'b',courbeMoyenne(:,1),courbeMoyenne(:,2),'r')
 subplot(1,2,2);
-plot(derivee(:,1),derivee(:,2),'-')
-axis([0 10 0 10])
+plot(derivee(:,1),derivee(:,2),'.')
+axis([2 6 0 0.5])
