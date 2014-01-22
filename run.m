@@ -19,15 +19,16 @@ end
 
 %Calcule la dérivée de la courbe moyenne pour estimer le coefficient
 %directeur
-derivee=zeros(size(T)-min-1,2);
+dt=floor(size(T,1)/50);
+derivee=zeros(size(T)-min-dt,2);
 for i=1 : size(derivee,1)
     derivee(i,1)=courbeMoyenne(i,1);
-    derivee(i,2)=(courbeMoyenne(i+1,2)-courbeMoyenne(i,2))/(courbeMoyenne(i+1,1)-courbeMoyenne(i,1));
+    derivee(i,2)=(courbeMoyenne(i+dt,2)-courbeMoyenne(i,2))/(courbeMoyenne(i+dt,1)-courbeMoyenne(i,1));
 end
 
 %Affiche le tout
-subplot(2,1,1);
-plot(T,Y(:,1),'b',courbeMoyenne(:,1),courbeMoyenne(:,2))
-subplot(2,1,2);
-plot(derivee(:,1),derivee(:,2),'.')
-axis([0 15 0 50])
+subplot(1,2,1);
+plot(T,Y(:,1),'b',courbeMoyenne(:,1),courbeMoyenne(:,2),'r')
+subplot(1,2,2);
+plot(derivee(:,1),derivee(:,2),'-')
+axis([0 10 0 10])
